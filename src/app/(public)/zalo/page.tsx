@@ -1,5 +1,9 @@
+import ZaloPage from "./client";
+
 const Page = () => {
-  return <div>Zalo</div>;
+  return <div>Zalo
+    <ZaloPage />
+  </div>;
 };
 
 export default Page;
