@@ -1,44 +1,37 @@
-'use client';
+"use client";
 
-import React from 'react';
-import { Space, Table, Tag } from 'antd';
-import type { TableProps } from 'antd';
+import React from "react";
+import { Space, Table, Tag } from "antd";
+import type { TableProps } from "antd";
 
-interface DataType {
-  id: string;
-  name: string;
-  age: number;
-  username: string;
-
-}
-
-const columns: TableProps<DataType>['columns'] = [
+const columns: TableProps["columns"] = [
   {
-    title: 'ID',
-    dataIndex: 'id',
-    key: 'id',
+    title: "ID",
+    dataIndex: "id",
+    key: "id",
     render: (text) => <a>{text}</a>,
   },
   {
-    title: 'Name',
-    dataIndex: 'name',
-    key: 'name',
+    title: "Title",
+    dataIndex: "title",
+    key: "title",
     render: (text) => <a>{text}</a>,
   },
   {
-    title: 'Age',
-    dataIndex: 'age',
-    key: 'age',
+    title: "Author",
+    dataIndex: "author",
+    key: "author",
+    render: (text) => <a>{text}</a>,
   },
   {
-    title: 'Username',
-    dataIndex: 'username',
-    key: 'username',
+    title: "Content",
+    dataIndex: "content",
+    key: "content",
   },
- 
+
   {
-    title: 'Action',
-    key: 'action',
+    title: "Action",
+    key: "action",
     render: (_, record) => (
       <Space size="middle">
         <a>Edit</a>
@@ -48,30 +41,12 @@ const columns: TableProps<DataType>['columns'] = [
   },
 ];
 
-const data: DataType[] = [
-  {
-    id: '1',
-    name: 'John Brown',
-    age: 32,
-    username: 'john_brown',
-   
-  },
-  {
-    id: '2',
-    name: 'Jim Green',
-    age: 42,
-    username: 'jim_green',
-   
-  },
-  {
-    id: '3',
-    name: 'Joe Black',
-    age: 32,
-    username: 'joe_black',
- 
-  },
-];
+interface DataTableProps {
+  props: IBlog[];
+}
 
-const DataTable: React.FC = () => <Table<DataType> columns={columns} dataSource={data} />;
+const DataTable = ({ props }: DataTableProps) => {
+  return <Table columns={columns} dataSource={props} rowKey="id" />;
+};
 
 export default DataTable;
