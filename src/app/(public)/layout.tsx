@@ -5,6 +5,7 @@ import Header from "@/components/header/header";
 import Footer from "@/components/footer/footer";
 
 const inter = Inter({ subsets: ["latin"] });
+import { ToastContainer } from "react-toastify";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -21,6 +22,7 @@ export default function RootLayout({
       <body className="min-h-screen flex flex-col">
         <Header />
         <main className="flex-grow">{children}</main>
+        <ToastContainer />
         <Footer />
       </body>
     </html>

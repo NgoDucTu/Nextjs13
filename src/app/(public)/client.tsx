@@ -1,6 +1,6 @@
 "use client";
 
-import useSWR from "swr";
+import useSWR, { mutate } from "swr";
 import { useEffect, useState } from "react";
 import DataTable from "@/components/table/table";
 import { Button } from "antd";
@@ -25,7 +25,20 @@ export default function FetchData() {
   );
 
   const [showModalCreate, setShowModalCreate] = useState<boolean>(false);
+  const [editingData, setEditingData] = useState<IBlog | null>(null);
+  const handleOpenCreateModal = () => {
+    setEditingData(null);
+    setShowModalCreate(true);
+  };
+  const handleCloseModal = () => {
+    setEditingData(null);
+    setShowModalCreate(false);
+  };
 
+  const handleDelete = (id: number) => {
+    data?.filter((blog: IBlog) => blog.id !== id);
+    mutate("http://localhost:8000/blogs");
+  };
   useEffect(() => {
     if (data) {
       console.log("Dữ liệu blog:", data);
@@ -42,15 +55,23 @@ export default function FetchData() {
     <div>
       <div className="flex justify-between ">
         <h2>Blogs Table</h2>
-        <Button className="my-1" onClick={() => setShowModalCreate(true)}>
+        <Button className="my-1" onClick={() => handleOpenCreateModal()}>
           Thêm
         </Button>
       </div>
 
-      <DataTable props={data} />
+      <DataTable
+        props={data}
+        onEdit={(record) => {
+          setEditingData(record);
+          setShowModalCreate(true);
+        }}
+        onDelete={handleDelete}
+      />
       <CreateModal
         showModalCreate={showModalCreate}
-        setShowModalCreate={setShowModalCreate}
+        setShowModalCreate={handleCloseModal}
+        editData={editingData}
       />
     </div>
   );
