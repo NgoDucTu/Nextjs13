@@ -1,4 +1,10 @@
 import FetchData from "../client";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Blogs fake",
+  description: "fake data",
+};
 
 export default function Blogs() {
   return (

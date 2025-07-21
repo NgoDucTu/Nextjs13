@@ -1,4 +1,10 @@
 import Link from "next/link";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Tund Next JS 13",
+  description: "About nextjs 13",
+};
 
 export default function Home() {
   return (
